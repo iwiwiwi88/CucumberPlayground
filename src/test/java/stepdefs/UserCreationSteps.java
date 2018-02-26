@@ -1,7 +1,5 @@
 package stepdefs;
 
-import java.util.List;
-
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -21,10 +19,20 @@ public class UserCreationSteps {
 		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
 	}
 
-	@When("^The user inputs valid username and password:$")
+	@When("^The user inputs username and password:$")
 	public void userInputsValidUsernameAndPassword(DataTable credsDataTable) throws Throwable {
 		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
 		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
+	}
+	
+	@When("^The user inputs (.*): (.*)$")
+	public void userInputsValueToTheField(String fieldName, String valueToBeInputted) {
+		
+	}
+	
+	@When("^The user clears (.*) field$") 
+	public void userClearsTheField(String fieldName) {
+		
 	}
 
 	@When("^The user clicks (.*) button$")
@@ -32,9 +40,14 @@ public class UserCreationSteps {
 		System.out.println("button clicked: " + buttonName);
 	}
 
-	@Then("^The user can see her/his credentials set correctly above the form:$")
+	@Then("^The user can see this credentials set above the form:$")
 	public void userCanSeeHisCredentialsOnTheForm(DataTable credsDataTable) throws Throwable {
 		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
 		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
+	}
+	
+	@Then("^The user can see the (.*) massage and closing it$")
+	public void userCanSeeMassageAndClosingIt(String massage) {
+		
 	}
 }
