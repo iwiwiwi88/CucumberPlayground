@@ -1,13 +1,33 @@
 package stepdefs;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import elements.Credentials;
 
 public class UserCreationSteps {
+
+	static WebDriver driver;
+
+	@Before
+	public static void setUp() {
+		System.out.println("=== SETUP ===");
+		System.setProperty("webdriver.chrome.driver", "/Users/iwonasasak/Documents/selenium/chromedriver");
+		driver = new ChromeDriver();
+	}
+
+	@After
+	public static void tearDown() {
+		System.out.println("=== TEARDOWN ===");
+		driver.quit();
+	}
 
 	@Given("^The user is on (.*) page$")
 	public void userIsOnUserCreationPage(String pageTitle) {
