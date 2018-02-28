@@ -1,5 +1,7 @@
 package stepdefs;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -10,7 +12,8 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import elements.Credentials;
+import helpers.Credentials;
+import helpers.DriverHelper;
 
 public class UserCreationSteps {
 
@@ -19,8 +22,7 @@ public class UserCreationSteps {
 	@Before
 	public static void setUp() {
 		System.out.println("=== SETUP ===");
-		System.setProperty("webdriver.chrome.driver", "/Users/iwonasasak/Documents/selenium/chromedriver");
-		driver = new ChromeDriver();
+		driver = DriverHelper.getWebDriver("CHROME");
 	}
 
 	@After
@@ -30,9 +32,8 @@ public class UserCreationSteps {
 	}
 
 	@Given("^The user is on (.*) page$")
-	public void userIsOnUserCreationPage(String pageTitle) {
-		System.out.println("pageTitle: " + pageTitle);
-		throw new PendingException();
+	public void userIsOnUserTheBasePage(String pageTitle) {
+		DriverHelper.getToTheBasePage(driver, pageTitle);
 	}
 
 	@Given("^Username and password is set to:$")
