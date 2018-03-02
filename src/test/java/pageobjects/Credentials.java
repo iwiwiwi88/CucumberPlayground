@@ -16,6 +16,9 @@ public class Credentials {
 
 	public String getPassword() {
 		return password;
-	};
+	}
 
+	public String toString() {
+		return "Credentials -> Username: ["+username+"] Password: ["+password+"]";
+	}
 }

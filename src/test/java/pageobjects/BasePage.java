@@ -5,16 +5,20 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Base {
+public class BasePage {
 
 	private WebDriver driver;
 
-	public Base(WebDriver driver) {
+	public BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public void visit(String url) {
 		driver.get(url);
+	}
+	
+	public String getCurrentUrl() {
+		return driver.getCurrentUrl();
 	}
 
 	public WebElement find(By locator) {

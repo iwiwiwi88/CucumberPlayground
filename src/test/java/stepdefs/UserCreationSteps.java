@@ -12,17 +12,21 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pageobjects.CreateUserPage;
 import pageobjects.Credentials;
 import pageobjects.DriverHelper;
+import sun.font.CreatedFontTracker;
 
 public class UserCreationSteps {
 
 	static WebDriver driver;
-
+	private static CreateUserPage createUserPage;
+	
 	@Before
 	public static void setUp() {
 		System.out.println("=== SETUP ===");
 		driver = DriverHelper.getWebDriver("CHROME");
+		createUserPage = new CreateUserPage(driver);
 	}
 
 	@After
@@ -31,9 +35,9 @@ public class UserCreationSteps {
 		driver.quit();
 	}
 
-	@Given("^The user is on (.*) page$")
-	public void userIsOnUserTheBasePage(String pageTitle) {
-		DriverHelper.getToTheBasePage(driver, pageTitle);
+	@Given("^The user is on Add a User page$")
+	public void userIsOnUserTheBasePage() {
+		createUserPage.visitBasePage();
 	}
 
 	@Given("^Username and password is set to:$")

@@ -1,7 +1,5 @@
 package pageobjects;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -13,13 +11,5 @@ public class DriverHelper {
 			return new ChromeDriver();
 		}
 		return null;
-	}
-
-	public static void getToTheBasePage(WebDriver driver, String pageTitle) {
-		if (pageTitle.equals("Add a User")) {
-			driver.get("http://thedemosite.co.uk/addauser.php");
-			Assert.assertTrue(
-					driver.findElement(By.xpath("//strong[contains(text(),'" + pageTitle + "')]")).isDisplayed());
-		}
 	}
 }
