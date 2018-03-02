@@ -1,9 +1,8 @@
 package stepdefs;
 
-import org.junit.Assert;
-import org.openqa.selenium.By;
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
@@ -12,21 +11,20 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageobjects.CreateUserPage;
+import pageobjects.CreateUser;
 import pageobjects.Credentials;
 import pageobjects.DriverHelper;
-import sun.font.CreatedFontTracker;
 
 public class UserCreationSteps {
 
 	static WebDriver driver;
-	private static CreateUserPage createUserPage;
+	private static CreateUser createUser;
 	
 	@Before
 	public static void setUp() {
 		System.out.println("=== SETUP ===");
 		driver = DriverHelper.getWebDriver("CHROME");
-		createUserPage = new CreateUserPage(driver);
+		createUser = new CreateUser(driver);
 	}
 
 	@After
@@ -37,21 +35,21 @@ public class UserCreationSteps {
 
 	@Given("^The user is on Add a User page$")
 	public void userIsOnUserTheBasePage() {
-		createUserPage.visitBasePage();
+		createUser.visitBasePage();
 	}
 
 	@Given("^Username and password is set to:$")
 	public void userCredentialsAreSetTo(DataTable credsDataTable) throws Throwable {
 		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
-		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
-		throw new PendingException();
+		createUser.withAndSubmit(creds);
+		createUser.visitBasePage();
 	}
 
 	@When("^The user inputs username and password:$")
 	public void userInputsValidUsernameAndPassword(DataTable credsDataTable) throws Throwable {
 		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
 		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
-		throw new PendingException();
+		createUser.with(creds);
 	}
 
 	@When("^The user inputs (.*): (.*)$")
@@ -67,14 +65,14 @@ public class UserCreationSteps {
 	@When("^The user clicks (.*) button$")
 	public void userClicksTheButton(String buttonName) {
 		System.out.println("button clicked: " + buttonName);
-		throw new PendingException();
+		createUser.submit();
 	}
 
 	@Then("^The user can see this credentials set above the form:$")
 	public void userCanSeeHisCredentialsOnTheForm(DataTable credsDataTable) throws Throwable {
-		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
-		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
-		throw new PendingException();
+		Credentials credsExpected = credsDataTable.asList(Credentials.class).get(0);
+		Credentials credsActual = createUser.getCreds();
+		assertTrue(credsExpected.equals(credsActual));
 	}
 
 	@Then("^The user can see the (.*) massage and closing it$")

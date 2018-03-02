@@ -18,7 +18,11 @@ public class Credentials {
 		return password;
 	}
 
+	public Boolean equals(Credentials theOtherCreds) {
+		return username.equals(theOtherCreds.getUsername()) && password.equals(theOtherCreds.getPassword());
+	}
+
 	public String toString() {
-		return "Credentials -> Username: ["+username+"] Password: ["+password+"]";
+		return "Credentials -> Username: [" + username + "] Password: [" + password + "]";
 	}
 }
