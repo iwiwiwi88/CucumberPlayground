@@ -30,6 +30,7 @@ public class BasePage {
 	}
 
 	public void type(String inputText, By locator) {
+		find(locator).sendKeys("");
 		find(locator).sendKeys(inputText);
 	}
 	
