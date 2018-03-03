@@ -1,5 +1,7 @@
 package pageobjects;
 
+import static org.junit.Assert.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +19,7 @@ public class BasePage {
 	public void visit(String url) {
 		driver.get(url);
 	}
-	
+
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
@@ -31,18 +33,19 @@ public class BasePage {
 	}
 
 	public void type(String inputText, By locator) {
-		find(locator).sendKeys("");
+		find(locator).clear();
 		find(locator).sendKeys(inputText);
 	}
-	
+
 	public void submit(By locator) {
 		find(locator).submit();
 	}
-	
+
 	public void clearField(By locator) {
 		find(locator).clear();
+		assertEquals("Field isn't cleared, value: " + find(locator).getText(), find(locator).getText(), "");
 	}
-	
+
 	public Boolean isDisplayed(By locator) {
 		try {
 			return find(locator).isDisplayed();

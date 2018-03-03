@@ -35,7 +35,9 @@ public class UserCreationSteps {
 
 	@Given("^The user is on Add a User page$")
 	public void userIsOnCreateUserTheBasePage() {
-		createUser.visitBasePage();
+		if (!createUser.isBasePageLoaded()) {
+			createUser.visitBasePage();
+		}
 	}
 
 	@Given("^Username and password is set to:$")

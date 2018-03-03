@@ -1,6 +1,6 @@
 package pageobjects;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,15 +20,19 @@ public class CreateUser extends BasePage {
 
 	public CreateUser(WebDriver driver) {
 		super(driver);
-		visit(createUserUrl);
-		assertTrue(isDisplayed(pageTitleLocator));
-		refreshCreds();
+		visitBasePage();
 	}
 
 	public void visitBasePage() {
 		visit(createUserUrl);
-		assertTrue(isDisplayed(pageTitleLocator));
+		assertTrue("The Add User Page didn't launch!", isDisplayed(pageTitleLocator));
 		refreshCreds();
+		System.out.println("The Add User Page launch correctly.\n" + currentCredentials);
+	}
+
+	public Boolean isBasePageLoaded() {
+		System.out.println("Current page loaded: " + getCurrentUrl());
+		return getCurrentUrl().equals(createUserUrl);
 	}
 
 	public Credentials getCreds() {
@@ -43,30 +47,32 @@ public class CreateUser extends BasePage {
 		String passLine = credsBoxText.substring(credsBoxText.indexOf('\n') + 1);
 		String pass = passLine.substring(passLine.indexOf(':') + 2);
 		currentCredentials = new Credentials(user, pass);
-		System.out.println("Current " + currentCredentials);
+		System.out.println(currentCredentials);
 	}
 
 	public void withCredentials(Credentials creds) {
-		type(creds.getUsername(), usernameForm);
-		type(creds.getPassword(), passwordForm);
+		inputUsername(creds.getUsername());
+		inputPassword(creds.getPassword());
 	}
 
 	public void withCredentialsAndSubmit(Credentials creds) {
 		withCredentials(creds);
-		click(submit);
+		submit();
 	}
 
 	public void submit() {
+		System.out.println("The user submits the form.");
 		click(submit);
 	}
 
 	public void inputUsername(String username) {
-		clearField(usernameForm);
+		System.out.println("The user inputs username [" + username + "]");
 		type(username, usernameForm);
+		System.out.println("Inputed: " + find(usernameForm).getText());
 	}
 
 	public void inputPassword(String password) {
-		clearField(passwordForm);
+		System.out.println("The user inputs password [" + password + "]");
 		type(password, passwordForm);
 	}
 
