@@ -34,14 +34,14 @@ public class UserCreationSteps {
 	}
 
 	@Given("^The user is on Add a User page$")
-	public void userIsOnUserTheBasePage() {
+	public void userIsOnCreateUserTheBasePage() {
 		createUser.visitBasePage();
 	}
 
 	@Given("^Username and password is set to:$")
 	public void userCredentialsAreSetTo(DataTable credsDataTable) throws Throwable {
 		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
-		createUser.withAndSubmit(creds);
+		createUser.withCredentialsAndSubmit(creds);
 		createUser.visitBasePage();
 	}
 
@@ -49,7 +49,7 @@ public class UserCreationSteps {
 	public void userInputsValidUsernameAndPassword(DataTable credsDataTable) throws Throwable {
 		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
 		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
-		createUser.with(creds);
+		createUser.withCredentials(creds);
 	}
 
 	@When("^The user inputs (.*): (.*)$")

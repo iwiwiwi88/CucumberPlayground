@@ -38,6 +38,7 @@ public class CreateUser extends BasePage {
 
 	public void refreshCreds() {
 		String credsBoxText = find(credsBox).getText();
+		//TODO implement regex parsing
 		String user = credsBoxText.substring(credsBoxText.indexOf(':') + 2, credsBoxText.indexOf('\n'));
 		String passLine = credsBoxText.substring(credsBoxText.indexOf('\n') + 1);
 		String pass = passLine.substring(passLine.indexOf(':') + 2);
@@ -45,13 +46,13 @@ public class CreateUser extends BasePage {
 		System.out.println("Current " + currentCredentials);
 	}
 
-	public void with(Credentials creds) {
+	public void withCredentials(Credentials creds) {
 		type(creds.getUsername(), usernameForm);
 		type(creds.getPassword(), passwordForm);
 	}
 
-	public void withAndSubmit(Credentials creds) {
-		with(creds);
+	public void withCredentialsAndSubmit(Credentials creds) {
+		withCredentials(creds);
 		click(submit);
 	}
 	
