@@ -19,7 +19,7 @@ public class UserCreationSteps {
 
 	static WebDriver driver;
 	private static CreateUser createUser;
-	
+
 	@Before
 	public static void setUp() {
 		System.out.println("=== SETUP ===");
@@ -54,12 +54,12 @@ public class UserCreationSteps {
 
 	@When("^The user inputs (.*): (.*)$")
 	public void userInputsValueToTheField(String fieldName, String valueToBeInputted) {
-		throw new PendingException();
+		createUser.inputTextIntoField(valueToBeInputted, fieldName);
 	}
 
 	@When("^The user clears (.*) field$")
 	public void userClearsTheField(String fieldName) {
-		throw new PendingException();
+		createUser.clearField(fieldName);
 	}
 
 	@When("^The user clicks (.*) button$")

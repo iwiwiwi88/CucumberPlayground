@@ -39,6 +39,10 @@ public class BasePage {
 		find(locator).submit();
 	}
 	
+	public void clearField(By locator) {
+		find(locator).clear();
+	}
+	
 	public Boolean isDisplayed(By locator) {
 		try {
 			return find(locator).isDisplayed();

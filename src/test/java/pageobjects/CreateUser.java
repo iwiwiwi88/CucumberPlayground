@@ -38,7 +38,7 @@ public class CreateUser extends BasePage {
 
 	public void refreshCreds() {
 		String credsBoxText = find(credsBox).getText();
-		//TODO implement regex parsing
+		// TODO implement regex parsing
 		String user = credsBoxText.substring(credsBoxText.indexOf(':') + 2, credsBoxText.indexOf('\n'));
 		String passLine = credsBoxText.substring(credsBoxText.indexOf('\n') + 1);
 		String pass = passLine.substring(passLine.indexOf(':') + 2);
@@ -55,9 +55,40 @@ public class CreateUser extends BasePage {
 		withCredentials(creds);
 		click(submit);
 	}
-	
+
 	public void submit() {
 		click(submit);
+	}
+
+	public void inputUsername(String username) {
+		clearField(usernameForm);
+		type(username, usernameForm);
+	}
+
+	public void inputPassword(String password) {
+		clearField(passwordForm);
+		type(password, passwordForm);
+	}
+
+	public void inputTextIntoField(String text, String fieldName) {
+		if (fieldName.toLowerCase().equals("username")) {
+			inputUsername(text);
+		} else if (fieldName.toLowerCase().equals("password")) {
+			inputPassword(text);
+		}
+	}
+
+	public void clearAllFields() {
+		clearField(usernameForm);
+		clearField(passwordForm);
+	}
+
+	public void clearField(String fieldName) {
+		if (fieldName.toLowerCase().equals("username")) {
+			clearField(usernameForm);
+		} else if (fieldName.toLowerCase().equals("password")) {
+			clearField(passwordForm);
+		}
 	}
 
 	public Boolean success() {
