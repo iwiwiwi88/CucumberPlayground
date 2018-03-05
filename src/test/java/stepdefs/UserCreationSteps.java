@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.WebDriver;
 
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -32,12 +31,16 @@ public class UserCreationSteps {
 		System.out.println("=== TEARDOWN ===");
 		driver.quit();
 	}
+	/*
+	 * @Given("^The user is on CreateAUserPage$") public void
+	 * userIsOnCreateUserTheBasePage() { if
+	 * (!createUser.isPageLoaded("CreateUser")) { createUser.visitBasePage(); }
+	 * }
+	 */
 
-	@Given("^The user is on Add a User page$")
-	public void userIsOnCreateUserTheBasePage() {
-		if (!createUser.isBasePageLoaded()) {
-			createUser.visitBasePage();
-		}
+	@Then("^The user is on (.*) page$")
+	public void userIsOnPage(String pageShortName) {
+		assertTrue("The page isn't loaded correctly!", createUser.isPageLoaded(pageShortName));
 	}
 
 	@Given("^Username and password is set to:$")
@@ -78,7 +81,8 @@ public class UserCreationSteps {
 	}
 
 	@Then("^The user can see the (.*) massage and closing it$")
-	public void userCanSeeMassageAndClosingIt(String massage) {
-		throw new PendingException();
+	public void userCanSeeMassageAndClosingIt(String messageType) {
+		createUser.alertWithMsgIsDisplayed(messageType);
+		createUser.acceptAlert();
 	}
 }

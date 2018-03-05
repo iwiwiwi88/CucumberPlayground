@@ -53,4 +53,29 @@ public class BasePage {
 			return false;
 		}
 	}
+
+	public Boolean isAlertPresent() {
+		try {
+			driver.switchTo().alert();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public String getAlertsText() {
+		try {
+			return driver.switchTo().alert().getText();
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	public void acceptAlert() {
+		try {
+			driver.switchTo().alert().accept();
+		} catch (Exception e) {
+
+		}
+	}
 }

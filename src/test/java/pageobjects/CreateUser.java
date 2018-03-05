@@ -10,6 +10,8 @@ public class CreateUser extends BasePage {
 	private final String pageTitle = "Add a User";
 	private final String createUserUrl = "http://thedemosite.co.uk/addauser.php";
 	private final String saveUrl = "http://thedemosite.co.uk/savedata.php";
+	private final String usernameTooShort = "Username too short.  The username must be at least 4 characters in length.";
+	private final String passwordTooShort = "Password too short.  The password must be at least 4 characters in length.";
 
 	Credentials currentCredentials;
 	By pageTitleLocator = By.xpath("//strong[contains(text(),'" + pageTitle + "')]");
@@ -30,9 +32,17 @@ public class CreateUser extends BasePage {
 		System.out.println("The Add User Page launch correctly.\n" + currentCredentials);
 	}
 
-	public Boolean isBasePageLoaded() {
-		System.out.println("Current page loaded: " + getCurrentUrl());
-		return getCurrentUrl().equals(createUserUrl);
+	public Boolean isPageLoaded(String pageShortName) {
+		String currentUrl = getCurrentUrl();
+		System.out.println("Current page loaded: " + currentUrl);
+		if (pageShortName.equals("CreateUser")) {
+			assertEquals("Expected url isn't loaded!", createUserUrl, currentUrl);
+			return true;
+		} else if (pageShortName.equals("Saved")) {
+			assertEquals("Expected url isn't loaded!", saveUrl, currentUrl);
+			return true;
+		}
+		return false;
 	}
 
 	public Credentials getCreds() {
@@ -68,7 +78,6 @@ public class CreateUser extends BasePage {
 	public void inputUsername(String username) {
 		System.out.println("The user inputs username [" + username + "]");
 		type(username, usernameForm);
-		System.out.println("Inputed: " + find(usernameForm).getText());
 	}
 
 	public void inputPassword(String password) {
@@ -97,13 +106,15 @@ public class CreateUser extends BasePage {
 		}
 	}
 
-	public Boolean success() {
-		return getCurrentUrl().equals(saveUrl);
-	}
-
-	public Boolean failure() {
-		// TODO Popup must be closed
-		return getCurrentUrl().equals(createUserUrl);
+	public void alertWithMsgIsDisplayed(String messageType) {
+		assertTrue("Alert isn't displayed!", isAlertPresent());
+		String actualAlertsText = getAlertsText();
+		System.out.println(actualAlertsText);
+		if (messageType.equals("UsernameTooShort")) {
+			assertEquals("Text on alert is different then expected!", usernameTooShort, actualAlertsText);
+		} else if (messageType.equals("PasswordTooShort")) {
+			assertEquals("Text on alert is different then expected!", passwordTooShort, actualAlertsText);
+		}
 	}
 
 }
