@@ -6,6 +6,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources/features", glue = "stepdefs")
-public class CucumberRunner {
+@CucumberOptions(features = "src/test/resources/features", glue = "stepdefs", tags = { "@positive" })
+public class PositiveScenariosRunner {
+
 }

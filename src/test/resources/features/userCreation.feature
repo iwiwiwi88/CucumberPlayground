@@ -2,6 +2,7 @@ Feature: Creating a new user on the thedemosite.
 	Should allow a user to create new credentials 
   with username and password with more than 4 characters.
 
+@positive 
 Scenario: A user can set valid credentials correctly 
 	Given The user is on CreateUser page 
 	And Username and password is set to: 
@@ -16,6 +17,7 @@ Scenario: A user can set valid credentials correctly
 		| username | password |
 		| testiwi  | testiwi  |
 		
+@negative 
 Scenario: A user can not use username that is shorter than 4 characters 
 	Given The user is on CreateUser page 
 	And Username and password is set to: 
@@ -30,6 +32,7 @@ Scenario: A user can not use username that is shorter than 4 characters
 		| username | password |
 		| test     | test     |
 		
+@negative 
 Scenario: A user can not use password that is shorter than 4 characters 
 	Given The user is on CreateUser page 
 	And Username and password is set to: 
@@ -44,6 +47,7 @@ Scenario: A user can not use password that is shorter than 4 characters
 		| username | password |
 		| test     | test     |
 		
+@negative 
 Scenario: A user must input both values to set the credentials 
 	Given The user is on CreateUser page 
 	And Username and password is set to: 
