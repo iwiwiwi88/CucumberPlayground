@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.security.UserAndPassword;
 
 public class CreateUser extends BasePage {
 
@@ -13,7 +14,7 @@ public class CreateUser extends BasePage {
 	private final String usernameTooShort = "Username too short.  The username must be at least 4 characters in length.";
 	private final String passwordTooShort = "Password too short.  The password must be at least 4 characters in length.";
 
-	Credentials currentCredentials;
+	UserAndPassword currentCredentials;
 	By pageTitleLocator = By.xpath("//strong[contains(text(),'" + pageTitle + "')]");
 	By usernameForm = By.name("username");
 	By passwordForm = By.name("password");
@@ -45,7 +46,7 @@ public class CreateUser extends BasePage {
 		return false;
 	}
 
-	public Credentials getCreds() {
+	public UserAndPassword getCreds() {
 		refreshCreds();
 		return currentCredentials;
 	}
@@ -56,16 +57,16 @@ public class CreateUser extends BasePage {
 		String user = credsBoxText.substring(credsBoxText.indexOf(':') + 2, credsBoxText.indexOf('\n'));
 		String passLine = credsBoxText.substring(credsBoxText.indexOf('\n') + 1);
 		String pass = passLine.substring(passLine.indexOf(':') + 2);
-		currentCredentials = new Credentials(user, pass);
+		currentCredentials = new UserAndPassword(user, pass);
 		System.out.println(currentCredentials);
 	}
 
-	public void withCredentials(Credentials creds) {
+	public void withCredentials(UserAndPassword creds) {
 		inputUsername(creds.getUsername());
 		inputPassword(creds.getPassword());
 	}
 
-	public void withCredentialsAndSubmit(Credentials creds) {
+	public void withCredentialsAndSubmit(UserAndPassword creds) {
 		withCredentials(creds);
 		submit();
 	}

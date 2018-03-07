@@ -3,7 +3,7 @@ package stepdefs;
 import static org.junit.Assert.assertTrue;
 
 import org.openqa.selenium.WebDriver;
-
+import org.openqa.selenium.security.UserAndPassword;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -11,7 +11,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageobjects.CreateUser;
-import pageobjects.Credentials;
 import pageobjects.DriverHelper;
 
 public class UserCreationSteps {
@@ -45,14 +44,14 @@ public class UserCreationSteps {
 
 	@Given("^Username and password is set to:$")
 	public void userCredentialsAreSetTo(DataTable credsDataTable) throws Throwable {
-		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
+		UserAndPassword creds = credsDataTable.asList(UserAndPassword.class).get(0);
 		createUser.withCredentialsAndSubmit(creds);
 		createUser.visitBasePage();
 	}
 
 	@When("^The user inputs username and password:$")
 	public void userInputsValidUsernameAndPassword(DataTable credsDataTable) throws Throwable {
-		Credentials creds = credsDataTable.asList(Credentials.class).get(0);
+		UserAndPassword creds = credsDataTable.asList(UserAndPassword.class).get(0);
 		System.out.println("user inputs username and pass: " + creds.getUsername() + " " + creds.getPassword());
 		createUser.withCredentials(creds);
 	}
@@ -75,8 +74,8 @@ public class UserCreationSteps {
 
 	@Then("^The user can see this credentials set above the form:$")
 	public void userCanSeeHisCredentialsOnTheForm(DataTable credsDataTable) throws Throwable {
-		Credentials credsExpected = credsDataTable.asList(Credentials.class).get(0);
-		Credentials credsActual = createUser.getCreds();
+		UserAndPassword credsExpected = credsDataTable.asList(UserAndPassword.class).get(0);
+		UserAndPassword credsActual = createUser.getCreds();
 		assertTrue(credsExpected.equals(credsActual));
 	}
 
