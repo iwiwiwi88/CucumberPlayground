@@ -30,7 +30,7 @@ public class CreateUser extends BasePage {
 		visit(createUserUrl);
 		assertTrue("The Add User Page didn't launch!", isDisplayed(pageTitleLocator));
 		refreshCreds();
-		System.out.println("The Add User Page launch correctly.\n" + currentCredentials);
+		System.out.println("The Add User Page launch correctly.\n" + credentialsToString(currentCredentials));
 	}
 
 	public Boolean isPageLoaded(String pageShortName) {
@@ -58,7 +58,7 @@ public class CreateUser extends BasePage {
 		String passLine = credsBoxText.substring(credsBoxText.indexOf('\n') + 1);
 		String pass = passLine.substring(passLine.indexOf(':') + 2);
 		currentCredentials = new UserAndPassword(user, pass);
-		System.out.println(currentCredentials);
+		credentialsToString(currentCredentials);
 	}
 
 	public void withCredentials(UserAndPassword creds) {

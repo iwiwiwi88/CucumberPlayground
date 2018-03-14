@@ -1,6 +1,6 @@
 package stepdefs;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.security.UserAndPassword;
@@ -75,8 +75,10 @@ public class UserCreationSteps {
 	@Then("^The user can see this credentials set above the form:$")
 	public void userCanSeeHisCredentialsOnTheForm(DataTable credsDataTable) throws Throwable {
 		UserAndPassword credsExpected = credsDataTable.asList(UserAndPassword.class).get(0);
+		createUser.refresh();
 		UserAndPassword credsActual = createUser.getCreds();
-		assertTrue(credsExpected.equals(credsActual));
+		assertEquals("Displayed credentials aren't correct!", createUser.credentialsToString(credsExpected),
+				createUser.credentialsToString(credsActual));
 	}
 
 	@Then("^The user can see the (.*) massage and closing it$")

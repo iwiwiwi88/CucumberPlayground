@@ -1,11 +1,12 @@
 package pageobjects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.security.UserAndPassword;
 
 public class BasePage {
 
@@ -22,6 +23,10 @@ public class BasePage {
 
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
+	}
+
+	public void refresh() {
+		driver.navigate().refresh();
 	}
 
 	public WebElement find(By locator) {
@@ -77,5 +82,9 @@ public class BasePage {
 		} catch (Exception e) {
 
 		}
+	}
+
+	public String credentialsToString(UserAndPassword creds) {
+		return "User [" + creds.getUsername() + "] Password [" + creds.getPassword() + "]";
 	}
 }
