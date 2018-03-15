@@ -7,11 +7,11 @@ Scenario: A user can login with valid credentials correctly
 	And Username and password is set to: 
 		| username 	| password 	|
 		| testiwi   | testiwi   |
-	And The user is on Login page 
-	When The user inputs login username and password: 
+	And LP The user is on Login page 
+	When LP The user inputs username and password:
 		| username | password |
 		| testiwi  | testiwi  |
-	And The user clicks Login button 
+	And LP The user clicks Login button
 	Then The Success message appears
 	
 @negative 
@@ -20,11 +20,11 @@ Scenario: A user can not login with invalid username
 	And Username and password is set to: 
 		| username 	| password 	|
 		| testiwi   | testiwi   |
-	And The user is on Login page 
-	When The user inputs login username and password: 
+	And LP The user is on Login page 
+	When LP The user inputs username and password: 
 		| username 	   | password  |
 		| testinvalid  | testiwi   |
-	And The user clicks Login button 
+	And LP The user clicks Login button
 	Then The Failure message appears
 	
 @negative 
@@ -33,10 +33,10 @@ Scenario: A user can not login with invalid password
 	And Username and password is set to: 
 		| username 	| password 	|
 		| testiwi   | testiwi   |
-	And The user is on Login page 
-	When The user inputs login username and password:  
+	And LP The user is on Login page 
+	When LP The user inputs username and password:  
 		| username | password    |
 		| testiwi  | testinvalid |
-	And The user clicks Login button 
+	And LP The user clicks Login button
 	Then The Failure message appears
 	

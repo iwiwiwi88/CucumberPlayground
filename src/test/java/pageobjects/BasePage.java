@@ -67,6 +67,10 @@ public class BasePage {
 			return false;
 		}
 	}
+	
+	public Boolean isTextPresentInTheSource(String text) {
+		return driver.getPageSource().contains(text);
+	}
 
 	public String getAlertsText() {
 		try {
