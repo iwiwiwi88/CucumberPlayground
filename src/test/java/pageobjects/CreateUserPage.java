@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.security.UserAndPassword;
 
-public class CreateUser extends BasePage {
+public class CreateUserPage extends BasePage {
 
 	private final String pageTitle = "Add a User";
 	private final String createUserUrl = "http://thedemosite.co.uk/addauser.php";
@@ -21,7 +21,7 @@ public class CreateUser extends BasePage {
 	By submit = By.name("FormsButton2");
 	By credsBox = By.xpath("html/body/table/tbody/tr/td[1]/blockquote/blockquote[2]/blockquote");
 
-	public CreateUser(WebDriver driver) {
+	public CreateUserPage(WebDriver driver) {
 		super(driver);
 		visitBasePage();
 	}

@@ -10,19 +10,19 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageobjects.CreateUser;
+import pageobjects.CreateUserPage;
 import pageobjects.DriverHelper;
 
 public class UserCreationSteps {
 
 	static WebDriver driver;
-	private static CreateUser createUser;
+	private static CreateUserPage createUser;
 
 	@Before
 	public static void setUp() {
 		System.out.println("=== SETUP ===");
 		driver = DriverHelper.getWebDriver("CHROME");
-		createUser = new CreateUser(driver);
+		createUser = new CreateUserPage(driver);
 	}
 
 	@After
@@ -30,6 +30,7 @@ public class UserCreationSteps {
 		System.out.println("=== TEARDOWN ===");
 		driver.quit();
 	}
+
 	/*
 	 * @Given("^The user is on CreateAUserPage$") public void
 	 * userIsOnCreateUserTheBasePage() { if
@@ -86,4 +87,5 @@ public class UserCreationSteps {
 		createUser.alertWithMsgIsDisplayed(messageType);
 		createUser.acceptAlert();
 	}
+
 }
